@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>متجر انتشار للمبدعين | اشتراكات وأدوات رقمية</title>
+  <meta name="description" content="متجر انتشار للمبدعين: اشتراكات وأدوات الذكاء الاصطناعي والتصميم والمونتاج والبرامج والخدمات الرقمية، والطلب مباشرة عبر واتساب.">
+  <meta name="theme-color" content="#1C103B">
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="ar_SY">
+  <meta property="og:site_name" content="متجر انتشار للمبدعين">
+  <meta property="og:title" content="متجر انتشار للمبدعين">
+  <meta property="og:description" content="اشتراكات وأدوات رقمية للمبدعين، اطلبها مباشرة عبر واتساب.">
+  <meta property="og:image" content="../assets/og-image.jpg">
+  <link rel="icon" href="../assets/favicon.ico" sizes="any">
+  <link rel="icon" type="image/png" href="../assets/favicon.png">
+  <link rel="apple-touch-icon" href="../assets/apple-touch-icon.png">
+  <link rel="preload" href="../fonts/cairo-arabic-700.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preconnect" href="https://rdrksssxgeicwlcednsb.supabase.co" crossorigin>
+  <link rel="stylesheet" href="store.css">
+</head>
+<body class="store">
+  <a class="skip" href="#catalog">انتقل إلى الخدمات</a>
+
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+    <symbol id="i-wa" viewBox="0 0 24 24"><path fill="currentColor" stroke="none" d="M12 2.2A9.7 9.7 0 0 0 3.6 16.8L2.3 21.7l5-1.3A9.7 9.7 0 1 0 12 2.2Zm0 17.7c-1.5 0-2.9-.4-4.1-1.1l-.3-.2-3 .8.8-2.9-.2-.3A8 8 0 1 1 12 19.9Zm4.4-6c-.2-.1-1.4-.7-1.7-.8-.2-.1-.4-.1-.5.1l-.8 1c-.1.2-.3.2-.5.1-.2-.1-1-.4-2-1.2-.7-.6-1.2-1.4-1.3-1.7-.1-.2 0-.4.1-.5l.4-.4.2-.4v-.4l-.8-1.8c-.2-.5-.4-.4-.5-.4h-.5c-.2 0-.5.1-.7.3-.2.3-.9.9-.9 2.2s.9 2.5 1 2.7c.1.2 1.8 2.8 4.4 3.9 2.2.9 2.6.7 3.1.7.5-.1 1.4-.6 1.6-1.2.2-.6.2-1.1.1-1.2l-.5-.3Z"/></symbol>
+    <symbol id="i-search" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="m20 20-4-4"/></symbol>
+    <symbol id="i-close" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6 6 18"/></symbol>
+    <symbol id="i-phone" viewBox="0 0 24 24"><path d="M5 4h3.5l1.6 4-2.2 1.4a11 11 0 0 0 6.7 6.7l1.4-2.2 4 1.6V19a1.8 1.8 0 0 1-2 1.8A16.5 16.5 0 0 1 3.2 6 1.8 1.8 0 0 1 5 4Z"/></symbol>
+  </svg>
+
+  <div class="announce" id="announce" hidden></div>
+
+  <header class="st-header">
+    <div class="container st-header-inner">
+      <a class="st-brand" href="./" aria-label="متجر انتشار للمبدعين">
+        <img src="../assets/logo.png" alt="انتشار" width="900" height="308">
+        <span class="st-brand-tag">متجر المبدعين</span>
+      </a>
+      <a class="btn btn-wa btn-sm st-header-cta" data-wa href="https://wa.me/963968747231" target="_blank" rel="noopener">
+        <svg class="ico"><use href="#i-wa"/></svg><span>اطلب عبر واتساب</span>
+      </a>
+    </div>
+  </header>
+
+  <main>
+    <section class="st-hero">
+      <div class="container">
+        <h1>متجر <span class="grad-text">انتشار</span> للمبدعين</h1>
+        <p class="st-hero-sub">اشتراكات وأدوات رقمية للمبدعين وصنّاع المحتوى، اختر الخدمة واطلبها مباشرة عبر واتساب.</p>
+        <label class="st-search">
+          <svg class="ico" aria-hidden="true"><use href="#i-search"/></svg>
+          <input id="q" type="search" placeholder="ابحث عن خدمة، مثل ChatGPT أو Canva" autocomplete="off" aria-label="ابحث عن خدمة">
+        </label>
+      </div>
+    </section>
+
+    <section class="container st-catalog" id="catalog" aria-label="الخدمات">
+      <div class="chips" id="chips" role="tablist" aria-label="الأقسام"></div>
+      <div class="svc-grid" id="grid" aria-live="polite">
+        <div class="svc-skel"></div><div class="svc-skel"></div><div class="svc-skel"></div><div class="svc-skel"></div>
+      </div>
+      <div class="st-empty" id="empty" hidden></div>
+    </section>
+  </main>
+
+  <footer class="st-footer">
+    <div class="container st-footer-inner">
+      <div>
+        <img src="../assets/logo.png" alt="انتشار" width="900" height="308" loading="lazy">
+        <p>متجر انتشار للمبدعين، مسار تابع لعلامة انتشار للاشتراكات والخدمات الرقمية.</p>
+      </div>
+      <div class="st-footer-contact">
+        <span>للطلبات والاستفسار</span>
+        <a class="ltr" data-tel href="tel:+963968747231"><svg class="ico"><use href="#i-phone"/></svg><span data-phone>+963 968 747 231</span></a>
+        <a href="../">موقع شركة انتشار</a>
+      </div>
+    </div>
+    <div class="container st-copy">© <span id="year"></span> انتشار Entishar</div>
+  </footer>
+
+  <a class="wa-float" data-wa href="https://wa.me/963968747231" target="_blank" rel="noopener" aria-label="تواصل عبر واتساب">
+    <svg class="ico"><use href="#i-wa"/></svg>
+  </a>
+
+  <dialog class="svc-modal" id="modal" aria-labelledby="m-name">
+    <div class="modal-inner" id="modal-body"></div>
+  </dialog>
+
+  <script src="vendor/supabase.js"></script>
+  <script src="common.js"></script>
+  <script src="store.js"></script>
+</body>
+</html>

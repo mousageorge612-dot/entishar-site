@@ -1,0 +1,164 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex, nofollow">
+  <title>لوحة تحكم المتجر | انتشار</title>
+  <meta name="theme-color" content="#1C103B">
+  <link rel="icon" type="image/png" href="../assets/favicon.png">
+  <link rel="stylesheet" href="store.css">
+  <link rel="stylesheet" href="admin.css">
+</head>
+<body class="admin">
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+    <symbol id="i-wa" viewBox="0 0 24 24"><path fill="currentColor" stroke="none" d="M12 2.2A9.7 9.7 0 0 0 3.6 16.8L2.3 21.7l5-1.3A9.7 9.7 0 1 0 12 2.2Zm0 17.7c-1.5 0-2.9-.4-4.1-1.1l-.3-.2-3 .8.8-2.9-.2-.3A8 8 0 1 1 12 19.9Z"/></symbol>
+    <symbol id="i-close" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6 6 18"/></symbol>
+    <symbol id="i-up" viewBox="0 0 24 24"><path d="m6 14 6-6 6 6"/></symbol>
+    <symbol id="i-down" viewBox="0 0 24 24"><path d="m6 10 6 6 6-6"/></symbol>
+    <symbol id="i-edit" viewBox="0 0 24 24"><path d="M4 20h4L19 9l-4-4L4 16v4Z"/><path d="m13.5 6.5 4 4"/></symbol>
+    <symbol id="i-trash" viewBox="0 0 24 24"><path d="M4 7h16M10 11v6M14 11v6M6 7l1 13h10l1-13M9 7V4h6v3"/></symbol>
+    <symbol id="i-plus" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></symbol>
+    <symbol id="i-eye" viewBox="0 0 24 24"><path d="M2 12s3.6-7 10-7 10 7 10 7-3.6 7-10 7S2 12 2 12Z"/><circle cx="12" cy="12" r="3"/></symbol>
+    <symbol id="i-eye-off" viewBox="0 0 24 24"><path d="M3 3l18 18M10.6 5.1A10 10 0 0 1 12 5c6.4 0 10 7 10 7a17 17 0 0 1-3.2 4M6.6 6.6A17 17 0 0 0 2 12s3.6 7 10 7a9.6 9.6 0 0 0 5.4-1.6M9.9 9.9a3 3 0 0 0 4.2 4.2"/></symbol>
+    <symbol id="i-upload" viewBox="0 0 24 24"><path d="M12 16V4M7 9l5-5 5 5M4 16v3a1 1 0 0 0 1 1h14a1 1 0 0 0 1-1v-3"/></symbol>
+  </svg>
+
+  <!-- تسجيل الدخول -->
+  <section class="login-wrap" id="login-view" hidden>
+    <form class="login-card" id="login-form" autocomplete="on">
+      <img src="../assets/logo.png" alt="انتشار" width="900" height="308">
+      <h1>لوحة تحكم المتجر</h1>
+      <label class="field"><span>البريد الإلكتروني</span><input type="email" name="email" required autocomplete="username" dir="ltr"></label>
+      <label class="field"><span>كلمة المرور</span><input type="password" name="password" required autocomplete="current-password" dir="ltr"></label>
+      <button class="btn btn-primary btn-block" type="submit">دخول</button>
+      <p class="form-msg" id="login-msg" role="alert"></p>
+    </form>
+  </section>
+
+  <!-- اللوحة -->
+  <div id="app-view" hidden>
+    <header class="ad-header">
+      <div class="container ad-header-inner">
+        <a class="st-brand" href="./" target="_blank" rel="noopener"><img src="../assets/logo.png" alt="انتشار" width="900" height="308"><span class="st-brand-tag">لوحة التحكم</span></a>
+        <a class="btn btn-soft btn-sm" href="./" target="_blank" rel="noopener">عرض المتجر</a>
+        <button class="btn btn-soft btn-sm" type="button" id="logout">خروج</button>
+      </div>
+      <nav class="container tabs" role="tablist">
+        <button class="tab" role="tab" data-tab="services" aria-selected="true">الخدمات</button>
+        <button class="tab" role="tab" data-tab="cats" aria-selected="false">الأقسام</button>
+        <button class="tab" role="tab" data-tab="settings" aria-selected="false">الإعدادات</button>
+      </nav>
+    </header>
+
+    <main class="container ad-main">
+      <section data-panel="services">
+        <div class="toolbar">
+          <input class="input" id="svc-q" type="search" placeholder="بحث في الخدمات">
+          <select class="input" id="svc-cat-filter"><option value="all">كل الأقسام</option></select>
+          <button class="btn btn-primary" type="button" id="add-svc"><svg class="ico"><use href="#i-plus"/></svg>إضافة خدمة</button>
+        </div>
+        <div class="svc-list" id="svc-list"></div>
+      </section>
+
+      <section data-panel="cats" hidden>
+        <form class="toolbar" id="cat-add">
+          <input class="input" name="name" placeholder="اسم القسم الجديد" required>
+          <button class="btn btn-primary" type="submit"><svg class="ico"><use href="#i-plus"/></svg>إضافة قسم</button>
+        </form>
+        <div class="cat-list" id="cat-list"></div>
+      </section>
+
+      <section data-panel="settings" hidden>
+        <form class="panel-card" id="settings-form">
+          <h2>إعدادات المتجر</h2>
+          <label class="field"><span>رقم واتساب الطلبات (بالصيغة الدولية بدون +)</span><input class="input" name="whatsapp" dir="ltr" inputmode="numeric" placeholder="963968747231"></label>
+          <label class="field"><span>شريط إعلان أعلى المتجر (اتركه فارغاً لإخفائه)</span><input class="input" name="announcement" maxlength="160"></label>
+          <button class="btn btn-primary" type="submit">حفظ الإعدادات</button>
+        </form>
+        <form class="panel-card" id="pass-form">
+          <h2>تغيير كلمة المرور</h2>
+          <label class="field"><span>كلمة المرور الجديدة</span><input class="input" type="password" name="password" minlength="8" required autocomplete="new-password" dir="ltr"></label>
+          <button class="btn btn-soft" type="submit">تغيير كلمة المرور</button>
+        </form>
+      </section>
+    </main>
+  </div>
+
+  <!-- محرر الخدمة -->
+  <dialog class="editor" id="editor" aria-labelledby="ed-title">
+    <form id="svc-form" class="editor-form" novalidate>
+      <div class="editor-head">
+        <h2 id="ed-title">خدمة جديدة</h2>
+        <button class="modal-close" type="button" data-close aria-label="إغلاق"><svg class="ico"><use href="#i-close"/></svg></button>
+      </div>
+      <div class="editor-grid">
+        <div class="editor-fields">
+          <label class="field"><span>اسم الخدمة *</span><input class="input" name="name" required maxlength="80" placeholder="مثال: ChatGPT Plus"></label>
+          <div class="row2">
+            <label class="field"><span>القسم</span><select class="input" name="category_id"></select></label>
+            <label class="field"><span>شارة على الغلاف (اختياري)</span><input class="input" name="badge" maxlength="24" placeholder="مثال: جديد"></label>
+          </div>
+          <label class="field"><span>وصف قصير على البطاقة</span><input class="input" name="summary" maxlength="140"></label>
+          <label class="field"><span>التفاصيل (تظهر عند فتح الخدمة)</span><textarea class="input" name="details" rows="4"></textarea></label>
+
+          <div class="field">
+            <span>الأسعار والخيارات</span>
+            <div class="plans-ed" id="plans-ed"></div>
+            <button class="btn btn-soft btn-sm" type="button" id="add-plan"><svg class="ico"><use href="#i-plus"/></svg>إضافة خيار</button>
+            <small class="hint">مثال: المدة «شهر» والسعر كما تريد أن يظهر تماماً مع العملة. اتركها فارغة ليظهر «اسأل عن السعر».</small>
+          </div>
+
+          <div class="media-ed">
+            <div class="media-box">
+              <span class="media-title">أيقونة التطبيق</span>
+              <div class="icon-prev" id="icon-prev"></div>
+              <input type="hidden" name="icon_url">
+              <div class="media-actions">
+                <label class="btn btn-soft btn-sm"><svg class="ico"><use href="#i-upload"/></svg>رفع صورة<input type="file" accept="image/*" data-upload="icon" hidden></label>
+                <button class="btn btn-danger btn-sm" type="button" data-clear="icon_url">إزالة</button>
+              </div>
+              <div class="inline-input">
+                <input class="input" id="icon-domain" dir="ltr" placeholder="chatgpt.com">
+                <button class="btn btn-soft btn-sm" type="button" id="fetch-icon">جلب الأيقونة</button>
+              </div>
+              <small class="hint">اكتب موقع التطبيق الرسمي لجلب أيقونته، أو ارفع صورة PNG/SVG.</small>
+            </div>
+            <div class="media-box">
+              <span class="media-title">صورة الغلاف</span>
+              <div class="cover-prev" id="cover-prev"></div>
+              <input type="hidden" name="cover_url">
+              <div class="media-actions">
+                <label class="btn btn-soft btn-sm"><svg class="ico"><use href="#i-upload"/></svg>رفع صورة<input type="file" accept="image/*" data-upload="cover" hidden></label>
+                <button class="btn btn-danger btn-sm" type="button" data-clear="cover_url">إزالة</button>
+              </div>
+              <label class="field inline"><span>لون الغلاف عند عدم وجود صورة</span><input type="color" name="accent" value="#7b3fd6"></label>
+              <small class="hint">المقاس الأفضل 1200×675 (16:9).</small>
+            </div>
+          </div>
+
+          <div class="row-checks">
+            <label class="check"><input type="checkbox" name="visible" checked> ظاهرة في المتجر</label>
+            <label class="check"><input type="checkbox" name="featured"> مميزة (تظهر أولاً)</label>
+          </div>
+        </div>
+        <aside class="editor-preview">
+          <span class="media-title">معاينة البطاقة</span>
+          <div id="card-prev"></div>
+        </aside>
+      </div>
+      <div class="editor-foot">
+        <p class="form-msg" id="ed-msg" role="alert"></p>
+        <button class="btn btn-soft" type="button" data-close>إلغاء</button>
+        <button class="btn btn-primary" type="submit" id="ed-save">حفظ الخدمة</button>
+      </div>
+    </form>
+  </dialog>
+
+  <div class="toast" id="toast" role="status" hidden></div>
+
+  <script src="vendor/supabase.js"></script>
+  <script src="common.js"></script>
+  <script src="admin.js"></script>
+</body>
+</html>

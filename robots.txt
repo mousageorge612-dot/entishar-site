@@ -1,3 +1,4 @@
 User-agent: *
 Allow: /
 Sitemap: https://intishar.store/sitemap.xml
+Disallow: /store/admin.html
