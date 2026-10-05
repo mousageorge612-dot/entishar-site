@@ -67,7 +67,7 @@
         (s.summary ? '<p class="modal-summary">' + esc(s.summary) + "</p>" : "") +
         (s.details ? '<div class="modal-details">' + esc(s.details) + "</div>" : "") +
         (plans.length ? '<fieldset class="plans"><legend>اختر الخيار</legend>' + plans.map((p, i) =>
-          '<label class="plan"><input type="radio" name="plan" value="' + i + '"' + (i === 0 ? " checked" : "") + '><span class="plan-label">' + esc(p.label || "الخيار " + (i + 1)) + '</span>' + (p.price ? priceTag(p.price, "plan-price") : '<span class="plan-price price-ask">اسأل عن السعر</span>') + "</label>").join("") + "</fieldset>"
+          '<label class="plan"><input type="radio" name="plan" value="' + i + '"' + (i === 0 ? " checked" : "") + '><span class="plan-label">' + esc(p.label || (plans.length === 1 ? "السعر" : "الخيار " + (i + 1))) + '</span>' + (p.price ? priceTag(p.price, "plan-price") : '<span class="plan-price price-ask">اسأل عن السعر</span>') + "</label>").join("") + "</fieldset>"
           : '<p class="price-ask">السعر عند الاستفسار عبر واتساب.</p>') +
         '<a class="btn btn-wa btn-block" id="m-order" target="_blank" rel="noopener" href="#"><svg class="ico"><use href="#i-wa"/></svg>اطلب عبر واتساب</a>' +
       "</div>";

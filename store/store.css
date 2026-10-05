@@ -82,6 +82,11 @@ p{margin:0 0 1em}
 .st-search input{flex:1;min-width:0;background:none;border:0;outline:0;height:46px;font-size:1rem;color:#fff}
 .st-search input::placeholder{color:rgba(238,238,239,.5)}
 
+.perks{list-style:none;margin:20px auto 0;padding:0;display:flex;flex-wrap:wrap;justify-content:center;gap:8px 18px;font-size:.9rem;color:var(--soft)}
+.perks li{display:inline-flex;align-items:center;gap:6px}
+.perks .ico{width:18px;height:18px;color:var(--cyan)}
+.st-footer .st-family{color:var(--white);font-weight:700}
+
 /* الأقسام */
 .st-catalog{padding-top:24px;padding-bottom:64px}
 .chips{display:flex;gap:8px;overflow-x:auto;padding:4px 2px 14px;scrollbar-width:none;-webkit-overflow-scrolling:touch}
@@ -118,6 +123,7 @@ p{margin:0 0 1em}
 .svc-foot .btn{position:relative;z-index:2}
 .svc-price{display:flex;flex-wrap:wrap;align-items:baseline;column-gap:6px;line-height:1.35;min-width:0}
 .price{font-size:1.18rem;font-weight:800;color:#fff}
+.price[dir="rtl"]{font-size:.95rem}
 .price-label{font-size:.8rem;color:var(--muted)}
 .price-more{flex-basis:100%;font-size:.76rem;color:var(--cyan)}
 .price-ask{font-size:.88rem;color:var(--muted)}
