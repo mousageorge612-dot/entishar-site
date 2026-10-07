@@ -206,7 +206,7 @@
       '<div class="card-icon"><svg class="ico"><use href="#' + ICONS[k] + '"/></svg></div>' +
       "<h3></h3><p class=\"note\"></p>" +
       '<p class="num"></p>' +
-      (k === "store" && L.store ? '<a class="store-link" target="_blank" rel="noopener"></a>' : "") +
+      (k === "store" && L.store ? '<a class="store-link"></a>' : "") +
       '<div class="ccard-actions">' +
         '<a class="btn btn-wa" target="_blank" rel="noopener"><svg class="ico"><use href="#i-wa"/></svg> واتساب</a>' +
         '<a class="btn btn-soft"><svg class="ico"><use href="#i-phone"/></svg> اتصال</a>' +
@@ -220,7 +220,7 @@
     acts[1].href = "tel:+" + c.wa;
     acts[1].setAttribute("aria-label", "اتصال " + c.label);
     var sl = el.querySelector(".store-link");
-    if (sl) { sl.href = L.store; sl.textContent = L.store.replace(/^https?:\/\//, ""); }
+    if (sl) { sl.href = L.store; sl.textContent = "زيارة المتجر"; }
     cc.appendChild(el);
   });
   document.getElementById("addr").textContent = D.address || "";

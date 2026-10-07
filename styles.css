@@ -309,7 +309,8 @@ p{margin:0 0 1em}
 .ccard.store{background:var(--purple);color:#fff;border:0}
 .ccard.store .note{color:rgba(255,255,255,.72)}
 .ccard.store .card-icon{background:rgba(255,255,255,.1);color:var(--cyan)}
-.ccard.store .store-link{font-size:.88rem;color:var(--cyan);font-weight:700;direction:ltr;text-align:right}
+.ccard.store .store-link{font-size:.92rem;color:var(--cyan);font-weight:700;width:fit-content}
+.ccard.store .store-link:hover{text-decoration:underline}
 .ccard.store .btn-soft{background:rgba(255,255,255,.1);color:#fff;border-color:rgba(255,255,255,.2)}
 
 .office{margin-top:20px;background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:22px;display:grid;gap:18px}
