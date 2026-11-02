@@ -342,7 +342,7 @@
           <button class="filter" data-filter="social" role="tab" aria-selected="false">سوشال ميديا</button>
           <button class="filter" data-filter="web" role="tab" aria-selected="false">مواقع إلكترونية</button>
           <button class="filter" data-filter="print" role="tab" aria-selected="false">مطبوعات</button>
-          <button class="filter" data-filter="media" role="tab" aria-selected="false">تصوير ومونتاج</button>
+          <button class="filter" data-filter="menu" role="tab" aria-selected="false">منيو إلكتروني</button>
         </div>
         <div class="gallery" id="gallery"></div>
       </div>
@@ -505,7 +505,9 @@
 
   <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="عرض العمل" hidden>
     <button class="lb-close" id="lbClose" aria-label="إغلاق"><svg class="ico"><use href="#i-close"/></svg></button>
-    <figure><img id="lbImg" alt=""><figcaption id="lbCap"></figcaption></figure>
+    <button class="lb-nav lb-prev" id="lbPrev" aria-label="الصورة السابقة">&#8250;</button>
+    <button class="lb-nav lb-next" id="lbNext" aria-label="الصورة التالية">&#8249;</button>
+    <figure><img id="lbImg" alt=""><figcaption><strong id="lbCap"></strong><span id="lbSub"></span><span class="lb-count" id="lbCount"></span><a id="lbLink" target="_blank" rel="noopener" hidden>زيارة الموقع</a></figcaption></figure>
   </div>
 
   <script src="data.js"></script>

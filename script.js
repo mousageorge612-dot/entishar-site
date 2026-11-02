@@ -123,22 +123,28 @@
   });
 
   /* المعرض */
-  var CAT = { identity: "هوية بصرية", social: "سوشال ميديا", web: "مواقع إلكترونية", print: "مطبوعات", media: "تصوير ومونتاج" };
+  var CAT = { identity: "هوية بصرية", social: "سوشال ميديا", web: "مواقع إلكترونية", print: "مطبوعات وتغليف", menu: "منيو إلكتروني" };
   var gallery = document.getElementById("gallery");
   (D.works || []).forEach(function (w) {
+    var cats = w.categories || (w.category ? [w.category] : []);
+    var imgs = w.images || (w.image ? [w.image] : []);
     var item = document.createElement("article");
-    item.className = "work" + (w.image ? "" : " placeholder");
-    item.setAttribute("data-cat", w.category);
-    var catName = CAT[w.category] || "";
-    if (w.image) {
+    item.className = "work" + (imgs.length ? "" : " placeholder");
+    item.setAttribute("data-cat", cats.join(" "));
+    var catName = CAT[cats[0]] || "";
+    if (imgs.length) {
       var b = document.createElement("button");
       b.className = "work-media";
       b.type = "button";
-      b.setAttribute("aria-label", "تكبير: " + (w.title || catName));
+      b.setAttribute("aria-label", "عرض: " + (w.title || catName));
       var img = document.createElement("img");
-      img.src = w.image; img.alt = (w.title || "") + " - " + catName; img.loading = "lazy";
+      img.src = w.thumb || imgs[0]; img.alt = (w.title || "") + " - " + catName; img.loading = "lazy";
       b.appendChild(img);
-      b.addEventListener("click", function () { openLb(w.image, (w.title ? w.title + " · " : "") + catName); });
+      if (imgs.length > 1) {
+        var n = document.createElement("span"); n.className = "work-count"; n.textContent = imgs.length === 2 ? "صورتان" : imgs.length + " صور";
+        b.appendChild(n);
+      }
+      b.addEventListener("click", function () { openLb(w, 0); });
       item.appendChild(b);
     } else {
       var ph = document.createElement("div");
@@ -149,8 +155,10 @@
     var info = document.createElement("div");
     info.className = "work-info";
     var h = document.createElement("h3"); h.textContent = w.title || "عمل من انتشار";
-    var c = document.createElement("span"); c.textContent = catName;
-    info.appendChild(h); info.appendChild(c);
+    info.appendChild(h);
+    if (w.subtitle) { var p = document.createElement("p"); p.textContent = w.subtitle; info.appendChild(p); }
+    var c = document.createElement("span"); c.textContent = cats.map(function (k) { return CAT[k]; }).filter(Boolean).join(" · ");
+    info.appendChild(c);
     item.appendChild(info);
     gallery.appendChild(item);
   });
@@ -166,7 +174,7 @@
       });
       var shown = 0;
       gallery.querySelectorAll(".work").forEach(function (w) {
-        var show = cat === "all" || w.getAttribute("data-cat") === cat;
+        var show = cat === "all" || (" " + w.getAttribute("data-cat") + " ").indexOf(" " + cat + " ") > -1;
         w.hidden = !show; if (show) shown++;
       });
       empty.hidden = shown > 0;
@@ -176,19 +184,44 @@
   /* التكبير */
   var lb = document.getElementById("lightbox");
   var lbImg = document.getElementById("lbImg");
-  var lastFocus = null;
-  function openLb(src, cap) {
-    lastFocus = document.activeElement;
-    lbImg.src = src; lbImg.alt = cap;
-    document.getElementById("lbCap").textContent = cap;
+  var lbPrev = document.getElementById("lbPrev"), lbNext = document.getElementById("lbNext");
+  var lbLink = document.getElementById("lbLink");
+  var lastFocus = null, cur = null, idx = 0;
+  function showLb() {
+    var imgs = cur.images || [cur.image];
+    lbImg.src = imgs[idx]; lbImg.alt = (cur.title || "") + " " + (idx + 1);
+    document.getElementById("lbCap").textContent = cur.title || "عمل من انتشار";
+    document.getElementById("lbSub").textContent = cur.subtitle || "";
+    document.getElementById("lbCount").textContent = imgs.length > 1 ? (idx + 1) + " / " + imgs.length : "";
+    lbPrev.hidden = lbNext.hidden = imgs.length < 2;
+    if (cur.url) { lbLink.href = cur.url; lbLink.hidden = false; } else { lbLink.hidden = true; }
+  }
+  function step(d) {
+    if (!cur) return; var n = (cur.images || []).length; if (n < 2) return;
+    idx = (idx + d + n) % n; showLb();
+  }
+  function openLb(w, i) {
+    lastFocus = document.activeElement; cur = w; idx = i || 0; showLb();
     lb.hidden = false; document.body.style.overflow = "hidden";
     document.getElementById("lbClose").focus();
   }
   function closeLb() {
     if (lb.hidden) return;
-    lb.hidden = true; document.body.style.overflow = "";
+    lb.hidden = true; document.body.style.overflow = ""; lbImg.src = "";
     if (lastFocus) lastFocus.focus();
   }
+  lbPrev.addEventListener("click", function () { step(-1); });
+  lbNext.addEventListener("click", function () { step(1); });
+  document.addEventListener("keydown", function (e) {
+    if (lb.hidden) return;
+    if (e.key === "ArrowLeft") step(1); else if (e.key === "ArrowRight") step(-1);
+  });
+  var tx = null;
+  lb.addEventListener("touchstart", function (e) { tx = e.touches[0].clientX; }, { passive: true });
+  lb.addEventListener("touchend", function (e) {
+    if (tx === null) return; var dx = e.changedTouches[0].clientX - tx; tx = null;
+    if (Math.abs(dx) > 50) step(dx > 0 ? 1 : -1);
+  });
   document.getElementById("lbClose").addEventListener("click", closeLb);
   lb.addEventListener("click", function (e) { if (e.target === lb) closeLb(); });
 
