@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 Disallow: /store/admin.html
-Sitemap: https://mousageorge612-dot.github.io/entishar-site/sitemap.xml
+Sitemap: https://entishar.agency/sitemap.xml
