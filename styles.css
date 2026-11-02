@@ -179,6 +179,7 @@ p{margin:0 0 1em}
 .cards{display:grid;gap:20px}
 @media (min-width:640px){.cards{grid-template-columns:repeat(2,1fr)}}
 @media (min-width:1024px){.cards{grid-template-columns:repeat(4,1fr)}}
+@media (min-width:640px) and (max-width:1023px){.cards > .card:last-child:nth-child(odd){grid-column:1/-1}}
 .card{background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:26px 22px;display:flex;flex-direction:column;transition:transform .25s ease,box-shadow .25s ease,border-color .25s ease;position:relative}
 .card:hover{transform:translateY(-4px);box-shadow:var(--shadow-lg);border-color:transparent}
 .card.highlight{border-color:var(--magenta);box-shadow:0 0 0 3px rgba(229,0,135,.18),var(--shadow-lg)}
