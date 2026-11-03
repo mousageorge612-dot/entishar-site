@@ -1,4 +1,3 @@
 User-agent: *
 Allow: /
-Disallow: /store/admin.html
 Sitemap: https://entishar.agency/sitemap.xml
