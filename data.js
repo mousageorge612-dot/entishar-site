@@ -15,7 +15,7 @@ window.ENTISHAR = {
 
   links: {
     instagram: "https://www.instagram.com/entishar.agency/",
-    store: "store/",
+    store: "https://store.entishar.agency/",
     maps: "",      // أضف رابط Google Maps الحقيقي للمكتب هنا ليظهر زر الخريطة
     facebook: ""   // أضف رابط صفحة فيسبوك المؤكد هنا ليظهر في الموقع
   },
